@@ -1,7 +1,6 @@
 test file...
 git flowsssss
 
-new line
 
 jhkjhgjhgfhj kjhgkhg 
 
@@ -16,7 +15,4 @@ jhkjhgjhgfhj kjhgkhg
 addgin 666
 
 
-77777s
-
-asdfsadfasfd
-ssss
+77777
