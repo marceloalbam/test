@@ -22,14 +22,54 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with:
-          path: 'edsi/'
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.2.0
         with:
           # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
           node-version: '14.6'
-      
+      - run: npm install
 
+      - name: Compile production assets
+        run: npm run prod
+
+      - name: Remove node_modules
+        run: rm -Rf node_modules
+
+      - name: Remove .git
+        run: rm -Rf .git
+
+      - name: GitHub Action for WP Engine Git Deployment
+        uses: wpengine/github-action-wpe-site-deploy@v2.3.3
+        with:
+
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+          PHP_LINT: FALSE
+          #FLAGS: -azvr --inplace --exclude=".*"
+          CACHE_CLEAR: FALSE
+          TPO_SRC_PATH: "."
+          TPO_PATH: "wp-content/themes/ttibase/"
+
+          # Branches & Environments
+          PRD_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_PROD }}
+          PRD_BRANCH: main
+
+          DEV_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_STAGE }}
+          DEV_BRANCH: develop
+
+
+          STG_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_GROUPS }}
+          STG_BRANCH: master
+
+  checklist_job:
+    runs-on: ubuntu-latest
+    name: checklist jobs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Checklist
+        uses: ttitamu@ttibase@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          template_dir: 'edsi/'
 
