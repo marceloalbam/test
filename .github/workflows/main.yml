@@ -23,8 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        template_dir: 'edsi/'
+          template_dir: 'edsi/'
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.2.0
