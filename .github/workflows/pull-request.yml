@@ -10,9 +10,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: pull-request
       id: open-pr
-      uses: repo-sync/pull-request@v3
+      uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "main"
+        destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: output-url
       run: echo ${{steps.open-pr.outputs.pr_url}}
