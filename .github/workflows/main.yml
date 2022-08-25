@@ -68,7 +68,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Checklist
-        uses: ttitamu@ttibase@v1.0.0
+        uses: marceloalbam@test@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           template_dir: 'edsi/'
