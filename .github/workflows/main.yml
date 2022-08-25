@@ -66,8 +66,9 @@ jobs:
     name: checklist jobs
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           template_dir: 'edsi/'
+          mapping: 'feature=feature/,feat/;bugfix/,release=release/'
 
