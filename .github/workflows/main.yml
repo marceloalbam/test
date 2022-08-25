@@ -39,27 +39,8 @@ jobs:
       - name: Remove .git
         run: rm -Rf .git
 
-      - name: GitHub Action for WP Engine Git Deployment
-        uses: wpengine/github-action-wpe-site-deploy@v2.3.3
-        with:
-
-          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
-          PHP_LINT: FALSE
-          #FLAGS: -azvr --inplace --exclude=".*"
-          CACHE_CLEAR: FALSE
-          TPO_SRC_PATH: "."
-          TPO_PATH: "wp-content/themes/ttibase/"
-
-          # Branches & Environments
-          PRD_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_PROD }}
-          PRD_BRANCH: main
-
-          DEV_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_STAGE }}
-          DEV_BRANCH: develop
-
-
-          STG_ENV: ${{ secrets.WPE_ENVIRONMENT_NAME_GROUPS }}
-          STG_BRANCH: master
+      template_dir: edsi/
+      github_token: ${{secrets.GITHUB_TOKEN}}
 
 
 
